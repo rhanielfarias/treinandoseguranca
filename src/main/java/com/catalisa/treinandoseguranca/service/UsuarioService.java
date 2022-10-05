@@ -3,6 +3,7 @@ package com.catalisa.treinandoseguranca.service;
 import com.catalisa.treinandoseguranca.model.UsuarioModel;
 import com.catalisa.treinandoseguranca.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,10 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     public List<UsuarioModel> buscarTodos() {
         return usuarioRepository.findAll();
     }
@@ -22,6 +27,7 @@ public class UsuarioService {
     }
 
     public UsuarioModel cadastrar(UsuarioModel usuarioModel) {
+        usuarioModel.setSenha(bCryptPasswordEncoder().encode(usuarioModel.getSenha()));
         return usuarioRepository.save(usuarioModel);
     }
 
