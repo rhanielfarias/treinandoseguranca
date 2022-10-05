@@ -1,6 +1,7 @@
 package com.catalisa.treinandoseguranca.controller;
 
 import com.catalisa.treinandoseguranca.model.UsuarioModel;
+import com.catalisa.treinandoseguranca.model.dto.UsuarioDto;
 import com.catalisa.treinandoseguranca.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping(path = "/usuarios")
-    public ResponseEntity<List<UsuarioModel>> buscarPorUsuario() {
+    public ResponseEntity<List<UsuarioDto>> buscarPorUsuario() {
         return ResponseEntity.ok(usuarioService.buscarTodos());
     }
 

@@ -1,6 +1,7 @@
 package com.catalisa.treinandoseguranca.service;
 
 import com.catalisa.treinandoseguranca.model.UsuarioModel;
+import com.catalisa.treinandoseguranca.model.dto.UsuarioDto;
 import com.catalisa.treinandoseguranca.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,8 +19,9 @@ public class UsuarioService {
         return new BCryptPasswordEncoder();
     }
 
-    public List<UsuarioModel> buscarTodos() {
-        return usuarioRepository.findAll();
+    public List<UsuarioDto> buscarTodos() {
+        List<UsuarioModel> usuarios = usuarioRepository.findAll();
+        return UsuarioDto.convert(usuarios);
     }
 
     public Optional<UsuarioModel> buscarId(Long codigo) {
